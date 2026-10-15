@@ -783,22 +783,30 @@ function editProduct(id) {
   document.getElementById("productForm").scrollIntoView({behavior:"smooth"});
 }
 
-function deleteProduct(id) {
+async function deleteProduct(id) {
   if (!loggedIn) return;
 
   if (!confirm("Veux-tu vraiment supprimer cet article ?")) return;
 
-  const oldProducts = [...products];
-  products = products.filter(product => product.id !== id);
+  try {
+    const { error } = await supabaseClient
+      .from("products")
+      .delete()
+      .eq("id", Number(id));
 
-  if (!saveProducts()) {
-    products = oldProducts;
-    return;
+    if (error) throw error;
+
+    await loadData();
+
+    renderProducts();
+    renderSellerProducts();
+
+    alert("Article supprimé de la boutique !");
+  } catch (error) {
+    console.error("Erreur de suppression :", error);
+    alert("Impossible de supprimer cet article.");
   }
-
-  renderProducts();
-  renderSellerProducts();
-}
+    }
 
 function saveSettings() {
   if (!loggedIn) return;
