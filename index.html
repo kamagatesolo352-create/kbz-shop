@@ -16,9 +16,7 @@
   --border: #333333;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
@@ -40,102 +38,34 @@ header {
   background: #101010;
 }
 
-.logo {
-  color: var(--gold);
-  font-size: 23px;
-  font-weight: 900;
-  letter-spacing: 1px;
-}
+.logo { color: var(--gold); font-size: 23px; font-weight: 900; letter-spacing: 1px; }
+.logo span { color: white; }
 
-.logo span {
-  color: white;
-}
+button, input, select, textarea { font: inherit; }
+button { cursor: pointer; }
+button:disabled { opacity: .5; cursor: not-allowed; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 
-button, input, select, textarea {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-}
-
-.btn {
-  border: none;
-  border-radius: 8px;
-  padding: 11px 14px;
-  font-weight: bold;
-}
-
-.gold {
-  background: var(--gold);
-  color: #151515;
-}
-
-.dark {
-  background: #292929;
-  color: white;
-  border: 1px solid #444;
-}
-
-header .btn {
-  padding: 9px 11px;
-  font-size: 13px;
-}
+.btn { border: none; border-radius: 8px; padding: 11px 14px; font-weight: bold; }
+.gold { background: var(--gold); color: #151515; }
+.dark { background: #292929; color: white; border: 1px solid #444; }
+header .btn { padding: 9px 11px; font-size: 13px; }
 
 .hero {
   padding: 55px 20px 48px;
   text-align: center;
-  background:
-    radial-gradient(ellipse at top, #40331d 0%, #191713 38%, #101010 75%);
+  background: radial-gradient(ellipse at top, #40331d 0%, #191713 38%, #101010 75%);
 }
+.hero .tag { color: var(--gold); font-size: 12px; font-weight: bold; letter-spacing: 3px; }
+.hero h1 { font-size: clamp(34px, 8vw, 55px); line-height: 1.1; margin: 18px 0; }
+.hero h1 span { color: var(--gold); }
+.hero p { color: #d0d0d0; max-width: 480px; margin: 0 auto 25px; line-height: 1.7; }
 
-.hero .tag {
-  color: var(--gold);
-  font-size: 12px;
-  font-weight: bold;
-  letter-spacing: 3px;
-}
+.section { padding: 28px 16px; max-width: 1100px; margin: auto; }
+.section-title { font-size: 25px; margin: 0 0 8px; }
+.subtitle { color: var(--muted); margin: 0 0 22px; font-size: 14px; }
 
-.hero h1 {
-  font-size: clamp(34px, 8vw, 55px);
-  line-height: 1.1;
-  margin: 18px 0;
-}
-
-.hero h1 span {
-  color: var(--gold);
-}
-
-.hero p {
-  color: #d0d0d0;
-  max-width: 480px;
-  margin: 0 auto 25px;
-  line-height: 1.7;
-}
-
-.section {
-  padding: 28px 16px;
-  max-width: 1100px;
-  margin: auto;
-}
-
-.section-title {
-  font-size: 25px;
-  margin: 0 0 8px;
-}
-
-.subtitle {
-  color: var(--muted);
-  margin: 0 0 22px;
-  font-size: 14px;
-}
-
-.filters {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin-bottom: 22px;
-}
+.filters { display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 22px; }
 
 input, select, textarea {
   width: 100%;
@@ -146,196 +76,54 @@ input, select, textarea {
   color: white;
   outline: none;
 }
+input:focus, select:focus, textarea:focus { border-color: var(--gold); }
 
-input:focus, select:focus, textarea:focus {
-  border-color: var(--gold);
-}
+.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
+.product { background: var(--card); border: 1px solid #2d2d2d; border-radius: 12px; overflow: hidden; min-width: 0; }
+.product img { width: 100%; height: 155px; object-fit: cover; background: #292929; display: block; }
+.product-body { padding: 12px; }
+.category { color: var(--gold); text-transform: uppercase; font-size: 10px; letter-spacing: 1px; }
+.product h3 { font-size: 15px; margin: 8px 0; overflow-wrap: anywhere; }
+.description { color: var(--muted); font-size: 12px; line-height: 1.5; min-height: 18px; overflow-wrap: anywhere; }
+.price { color: var(--gold); font-size: 17px; font-weight: bold; margin: 12px 0; }
+.stock { font-size: 11px; color: #bdbdbd; margin-bottom: 10px; }
+.product .btn { width: 100%; padding: 10px 5px; font-size: 12px; }
 
-.product {
-  background: var(--card);
-  border: 1px solid #2d2d2d;
-  border-radius: 12px;
-  overflow: hidden;
-  min-width: 0;
-}
-
-.product img {
-  width: 100%;
-  height: 155px;
-  object-fit: cover;
-  background: #292929;
-  display: block;
-}
-
-.product-body {
-  padding: 12px;
-}
-
-.category {
-  color: var(--gold);
-  text-transform: uppercase;
-  font-size: 10px;
-  letter-spacing: 1px;
-}
-
-.product h3 {
-  font-size: 15px;
-  margin: 8px 0;
-  overflow-wrap: anywhere;
-}
-
-.description {
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.5;
-  min-height: 18px;
-  overflow-wrap: anywhere;
-}
-
-.price {
-  color: var(--gold);
-  font-size: 17px;
-  font-weight: bold;
-  margin: 12px 0;
-}
-
-.stock {
-  font-size: 11px;
-  color: #bdbdbd;
-  margin-bottom: 10px;
-}
-
-.product .btn {
-  width: 100%;
-  padding: 10px 5px;
-  font-size: 12px;
-}
-
-.empty {
-  grid-column: 1 / -1;
-  text-align: center;
-  color: var(--muted);
-  padding: 35px 10px;
-  background: var(--card);
-  border-radius: 10px;
-}
+.empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 35px 10px; background: var(--card); border-radius: 10px; }
 
 .notice {
-  margin-top: 20px;
-  padding: 14px;
-  background: #211e17;
-  border: 1px solid #594a2d;
-  border-radius: 8px;
-  color: #e9d9b5;
-  font-size: 12px;
-  line-height: 1.6;
+  margin-top: 20px; padding: 14px; background: #211e17; border: 1px solid #594a2d;
+  border-radius: 8px; color: #e9d9b5; font-size: 12px; line-height: 1.6;
 }
 
-.seller {
-  max-width: 650px;
-  margin: 20px auto;
-  padding: 18px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-}
+.seller { max-width: 650px; margin: 20px auto; padding: 18px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; }
+.seller h2 { color: var(--gold); margin-top: 0; }
+.seller label { display: block; margin: 15px 0 7px; font-size: 13px; color: #ddd; }
+.seller .btn { margin-top: 12px; }
 
-.seller h2 {
-  color: var(--gold);
-  margin-top: 0;
-}
+.form-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
 
-.seller label {
-  display: block;
-  margin: 15px 0 7px;
-  font-size: 13px;
-  color: #ddd;
-}
+.item-row { padding: 12px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; gap: 10px; align-items: center; }
+.item-row strong { overflow-wrap: anywhere; }
+.item-row button { margin: 3px 0; }
 
-.seller .btn {
-  margin-top: 12px;
-}
+.small { font-size: 12px; color: var(--muted); line-height: 1.6; }
+.error { color: #ff8a80; font-weight: bold; }
+.hidden { display: none !important; }
 
-.form-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-}
-
-.item-row {
-  padding: 12px 0;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  align-items: center;
-}
-
-.item-row strong {
-  overflow-wrap: anywhere;
-}
-
-.item-row button {
-  margin: 3px 0;
-}
-
-.small {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.6;
-}
-
-.hidden {
-  display: none !important;
-}
-
-footer {
-  margin-top: 35px;
-  border-top: 1px solid var(--border);
-  padding: 27px 16px;
-  text-align: center;
-  color: var(--muted);
-  font-size: 12px;
-  line-height: 1.8;
-}
-
-footer strong {
-  color: var(--gold);
-}
+footer { margin-top: 35px; border-top: 1px solid var(--border); padding: 27px 16px; text-align: center; color: var(--muted); font-size: 12px; line-height: 1.8; }
+footer strong { color: var(--gold); }
 
 @media (min-width: 600px) {
-  .filters {
-    grid-template-columns: 2fr 1fr;
-  }
-
-  .grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-  }
-
-  .product img {
-    height: 210px;
-  }
-
-  .form-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .hero {
-    padding: 75px 20px 65px;
-  }
+  .filters { grid-template-columns: 2fr 1fr; }
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .product img { height: 210px; }
+  .form-grid { grid-template-columns: 1fr 1fr; }
+  .hero { padding: 75px 20px 65px; }
 }
-
 @media (min-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
+  .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 </style>
 </head>
@@ -364,8 +152,8 @@ footer strong {
   <p class="subtitle">Trouve ton prochain coup de cœur.</p>
 
   <div class="filters">
-    <input id="search" type="search" placeholder="Rechercher un article..." oninput="renderProducts()">
-    <select id="categoryFilter" onchange="renderProducts()">
+    <input id="search" type="search" placeholder="Rechercher un article..." aria-label="Rechercher un article" oninput="renderProducts()">
+    <select id="categoryFilter" aria-label="Filtrer par catégorie" onchange="renderProducts()">
       <option value="">Toutes les catégories</option>
       <option value="Vêtements">Vêtements</option>
       <option value="Chaussures">Chaussures</option>
@@ -374,7 +162,7 @@ footer strong {
     </select>
   </div>
 
-  <div class="grid" id="products"></div>
+  <div class="grid" id="products" aria-live="polite"></div>
 
   <div class="notice">
     <strong>Comment commander ?</strong><br>
@@ -388,17 +176,20 @@ footer strong {
     <h2>Espace vendeur KBZ SHOP</h2>
 
     <div id="loginPanel">
-      <p class="small">Entre ton code vendeur pour accéder à la gestion de la boutique.</p>
-      <label for="sellerCode">Code vendeur</label>
-      <input id="sellerEmail" type="email" placeholder="Ton adresse e-mail" autocomplete="username">
-<input id="sellerPassword" type="password" placeholder="Ton mot de passe" autocomplete="current-password">
-      <button class="btn gold" onclick="loginSeller()">Accéder à mon espace</button>
-      <button class="btn dark" onclick="closeSeller()">Fermer</button>
-      <p class="small" id="loginMessage"></p>
+      <p class="small">Connecte-toi avec ton compte vendeur pour gérer la boutique.</p>
+      <form id="loginForm">
+        <label for="sellerEmail">Adresse e-mail</label>
+        <input id="sellerEmail" type="email" required placeholder="Ton adresse e-mail" autocomplete="username">
+        <label for="sellerPassword">Mot de passe</label>
+        <input id="sellerPassword" type="password" required placeholder="Ton mot de passe" autocomplete="current-password">
+        <button class="btn gold" type="submit" id="loginBtn">Accéder à mon espace</button>
+        <button class="btn dark" type="button" onclick="closeSeller()">Fermer</button>
+      </form>
+      <p class="small" id="loginMessage" role="status"></p>
     </div>
 
     <div id="managementPanel" class="hidden">
-      <h3>Ajouter un article</h3>
+      <h3 id="formTitle">Ajouter un article</h3>
 
       <form id="productForm">
         <label for="itemName">Nom de l'article *</label>
@@ -407,7 +198,7 @@ footer strong {
         <div class="form-grid">
           <div>
             <label for="itemPrice">Prix en FCFA *</label>
-            <input id="itemPrice" type="number" min="1" step="1" required placeholder="Ex. : 15000">
+            <input id="itemPrice" type="number" min="1" step="1" required placeholder="Ex. : 15000" inputmode="numeric">
           </div>
           <div>
             <label for="itemCategory">Catégorie</label>
@@ -421,16 +212,17 @@ footer strong {
         </div>
 
         <label for="itemStock">Stock disponible</label>
-        <input id="itemStock" type="number" min="0" step="1" value="1">
+        <input id="itemStock" type="number" min="0" step="1" value="1" inputmode="numeric">
 
         <label for="itemDescription">Description</label>
         <textarea id="itemDescription" rows="3" maxlength="500" placeholder="Décris ton article..."></textarea>
 
         <label for="itemPhoto">Photo de l'article (facultatif)</label>
         <input id="itemPhoto" type="file" accept="image/*">
-        <p class="small">Choisis une photo depuis ton téléphone. Les grandes images seront réduites automatiquement.</p>
+        <p class="small" id="photoHint">Choisis une photo depuis ton téléphone. Les grandes images seront réduites automatiquement.</p>
 
-        <button class="btn gold" type="submit">Enregistrer l'article</button>
+        <button class="btn gold" type="submit" id="saveBtn">Enregistrer l'article</button>
+        <button class="btn dark hidden" type="button" id="cancelEditBtn" onclick="cancelEdit()">Annuler la modification</button>
       </form>
 
       <h3>Mes articles publiés</h3>
@@ -440,14 +232,12 @@ footer strong {
       <label for="whatsappNumber">Numéro WhatsApp du vendeur</label>
       <input id="whatsappNumber" inputmode="tel" placeholder="Ex. : 2250700000000">
       <p class="small">Pour la Côte d'Ivoire, ajoute l'indicatif 225 avant ton numéro, sans le signe +.</p>
-      <button class="btn gold" onclick="saveSettings()">Enregistrer les réglages</button>
+      <button class="btn gold" id="settingsBtn" onclick="saveSettings()">Enregistrer les réglages</button>
 
       <button class="btn dark" onclick="logoutSeller()">Quitter l'espace vendeur</button>
 
       <p class="small">
-        Les produits et réglages de cette version sont enregistrés dans
-        le navigateur de cet appareil. Ils ne sont pas encore partagés
-        automatiquement avec les autres visiteurs.
+        Les articles et les réglages enregistrés ici sont visibles par tous les visiteurs de la boutique.
       </p>
     </div>
   </div>
@@ -460,14 +250,20 @@ footer strong {
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  
-  <script>
-const SELLER_CODE = "5574";const SUPABASE_URL = "https://ojelswkxcgyyayonvdnk.supabase.co";
+<script>
+/* ---------- Configuration (clé PUBLIQUE uniquement : aucun secret ici) ---------- */
+const SUPABASE_URL = "https://ojelswkxcgyyayonvdnk.supabase.co";
 const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_ZNTeFqr0eG6344aaivSzLQ_iOnk8mPW";
-const supabaseClient = window.supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY
-);
+// Sert seulement à l'affichage. La vraie protection est dans Supabase (RLS, voir securite-supabase.sql).
+const SELLER_USER_ID = "81525847-5eab-42ce-b621-95c8bc96241e";
+const BUCKET = "product-images";
+
+let supabaseClient = null;
+try {
+  supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+} catch (error) {
+  console.error("Supabase indisponible :", error);
+}
 
 const PLACEHOLDER_IMAGE =
   "data:image/svg+xml;charset=UTF-8," +
@@ -484,15 +280,50 @@ const PLACEHOLDER_IMAGE =
 let products = [];
 let settings = { whatsapp: "" };
 let loggedIn = false;
+let loadFailed = false;
+let loadErrorDetail = "";
+let loadedOnce = false;
 let editingId = null;
 
+const $ = id => document.getElementById(id);
+
+/* ---------- Utilitaires ---------- */
+function formatPrice(price) {
+  return Number(price).toLocaleString("fr-FR") + " FCFA";
+}
+
+function safeText(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+  })[char]);
+}
+
+function friendlyError(error) {
+  const text = String((error && (error.message || error.error_description)) || "");
+  if (error && (error.code === "42501" || /row-level security|permission denied|not authorized/i.test(text))) {
+    return "Action refusée. Reconnecte-toi avec le compte vendeur.";
+  }
+  if (/jwt|token|expired/i.test(text)) {
+    return "Ta session a expiré. Reconnecte-toi puis réessaie.";
+  }
+  if (/failed to fetch|network/i.test(text)) {
+    return "Problème de connexion internet. Réessaie.";
+  }
+  return "Erreur : " + (text || "inconnue");
+}
+
+/* ---------- Chargement des données ---------- */
 async function loadData() {
+  if (!supabaseClient) {
+    loadErrorDetail = "La bibliothèque Supabase n'a pas pu se charger (réseau bloqué ?).";
+    loadFailed = true; loadedOnce = true; return false;
+  }
+
   try {
     const { data, error } = await supabaseClient
       .from("products")
       .select("*")
       .order("id", { ascending: false });
-
     if (error) throw error;
 
     products = (data || []).map(item => ({
@@ -505,58 +336,60 @@ async function loadData() {
       photo: item.image_url || ""
     }));
 
-    const { data: shopSettings, error: settingsError } =
-      await supabaseClient
-        .from("shop_settings")
-        .select("whatsapp")
-        .eq("id", 1)
-        .maybeSingle();
-
+    const { data: shopSettings, error: settingsError } = await supabaseClient
+      .from("shop_settings")
+      .select("whatsapp")
+      .eq("id", 1)
+      .maybeSingle();
     if (settingsError) throw settingsError;
 
-    settings = {
-      whatsapp: shopSettings?.whatsapp || ""
-    };
-
-  } catch (error) {
-    console.error("Erreur de chargement :", error);
-    products = [];
-    settings = { whatsapp: "" };
-  }
-}
-
-function saveProducts() {
-  try {
-    localStorage.setItem("kbz_products", JSON.stringify(products));
+    settings = { whatsapp: shopSettings?.whatsapp || "" };
+    loadFailed = false;
+    loadedOnce = true;
     return true;
   } catch (error) {
-    alert("Le stockage du téléphone est plein. Essaie une photo plus petite.");
+    const detail = [error && error.code, error && error.message, error && error.details, error && error.hint]
+      .filter(Boolean).join(" | ") || String(error);
+    loadErrorDetail = detail;
+    console.error("Erreur de chargement : " + detail, error);
+    loadFailed = true;
+    loadedOnce = true;
     return false;
   }
 }
 
-function formatPrice(price) {
-  return Number(price).toLocaleString("fr-FR") + " FCFA";
+async function reloadAll() {
+  $("products").innerHTML = '<div class="empty">Chargement des articles…</div>';
+  await loadData();
+  renderProducts();
+  renderSellerProducts();
 }
 
-function safeText(value) {
-  return String(value ?? "").replace(/[&<>"']/g, char => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[char]);
-}
-
+/* ---------- Affichage du catalogue ---------- */
 function renderProducts() {
-  const container = document.getElementById("products");
-  const search = document.getElementById("search").value.toLowerCase().trim();
-  const category = document.getElementById("categoryFilter").value;
+  const container = $("products");
+
+  if (!loadedOnce) {
+    container.innerHTML = '<div class="empty">Chargement des articles…</div>';
+    return;
+  }
+
+  if (loadFailed) {
+    container.innerHTML = `
+      <div class="empty">
+        <h3>Impossible de charger les articles</h3>
+        <p>Vérifie ta connexion internet puis réessaie.</p>
+        <p class="small">Détail technique : ${safeText(loadErrorDetail)}</p>
+        <button class="btn gold" onclick="reloadAll()">Réessayer</button>
+      </div>`;
+    return;
+  }
+
+  const search = $("search").value.toLowerCase().trim();
+  const category = $("categoryFilter").value;
 
   const filtered = products.filter(product => {
-    const matchesSearch =
-      (product.name + " " + product.description).toLowerCase().includes(search);
+    const matchesSearch = (product.name + " " + product.description).toLowerCase().includes(search);
     const matchesCategory = !category || product.category === category;
     return matchesSearch && matchesCategory;
   });
@@ -572,8 +405,8 @@ function renderProducts() {
 
   container.innerHTML = filtered.map(product => `
     <article class="product">
-      <img src="${product.photo || PLACEHOLDER_IMAGE}"
-           alt="${safeText(product.name)}"
+      <img src="${safeText(product.photo || PLACEHOLDER_IMAGE)}"
+           alt="${safeText(product.name)}" loading="lazy"
            onerror="this.onerror=null;this.src=PLACEHOLDER_IMAGE">
       <div class="product-body">
         <div class="category">${safeText(product.category)}</div>
@@ -587,7 +420,7 @@ function renderProducts() {
         </div>
         <button class="btn gold"
           ${Number(product.stock) <= 0 ? "disabled" : ""}
-          onclick="orderProduct('${product.id}')">
+          onclick="orderProduct('${safeText(product.id)}')">
           Commander sur WhatsApp
         </button>
       </div>
@@ -595,52 +428,80 @@ function renderProducts() {
   `).join("");
 }
 
+/* ---------- Espace vendeur : ouverture / session ---------- */
 function openSeller() {
-  document.getElementById("sellerSection").classList.remove("hidden");
-  document.getElementById("sellerSection").scrollIntoView({behavior:"smooth"});
+  $("sellerSection").classList.remove("hidden");
+  $("sellerSection").scrollIntoView({ behavior: "smooth" });
 }
 
 function closeSeller() {
-  document.getElementById("sellerSection").classList.add("hidden");
+  $("sellerSection").classList.add("hidden");
 }
 
-async function loginSeller() {
-  const email = document.getElementById("sellerEmail").value.trim();
-  const password = document.getElementById("sellerPassword").value;
-  const message = document.getElementById("loginMessage");
-
-  message.textContent = "Connexion en cours...";
-
-  const { data, error } = await supabaseClient.auth.signInWithPassword({
-    email: email,
-    password: password
-  });
-
-  if (error) {
-    message.textContent = "Connexion impossible. Vérifie ton e-mail et ton mot de passe.";
-    return;
+function applySession(session) {
+  loggedIn = !!session && session.user && session.user.id === SELLER_USER_ID;
+  $("loginPanel").classList.toggle("hidden", loggedIn);
+  $("managementPanel").classList.toggle("hidden", !loggedIn);
+  if (loggedIn) {
+    $("whatsappNumber").value = settings.whatsapp || "";
+    renderSellerProducts();
   }
-
-  loggedIn = true;
-  document.getElementById("loginPanel").classList.add("hidden");
-  document.getElementById("managementPanel").classList.remove("hidden");
-  document.getElementById("whatsappNumber").value = settings.whatsapp || "";
-  renderSellerProducts();
 }
 
-function logoutSeller() {
+$("loginForm").addEventListener("submit", async event => {
+  event.preventDefault();
+  if (!supabaseClient) { $("loginMessage").textContent = "Service indisponible. Réessaie plus tard."; return; }
+
+  const email = $("sellerEmail").value.trim();
+  const password = $("sellerPassword").value;
+  const message = $("loginMessage");
+  const button = $("loginBtn");
+
+  message.classList.remove("error");
+  message.textContent = "Connexion en cours...";
+  button.disabled = true;
+
+  try {
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+    if (error) throw error;
+
+    if (!data.user || data.user.id !== SELLER_USER_ID) {
+      await supabaseClient.auth.signOut();
+      message.classList.add("error");
+      message.textContent = "Ce compte n'est pas le compte vendeur.";
+    } else {
+      message.textContent = "";
+      $("sellerPassword").value = "";
+      await reloadAll();
+      applySession(data.session);
+    }
+  } catch (error) {
+    console.error("Erreur de connexion :", error);
+    message.classList.add("error");
+    message.textContent = "Connexion impossible. Vérifie ton e-mail et ton mot de passe.";
+  }
+  button.disabled = false;
+});
+
+async function logoutSeller() {
+  try {
+    if (supabaseClient) {
+      const { error } = await supabaseClient.auth.signOut();
+      if (error) throw error;
+    }
+  } catch (error) {
+    console.error("Erreur de déconnexion :", error);
+  }
   loggedIn = false;
-  editingId = null;
-  document.getElementById("productForm").reset();
-  document.getElementById("loginPanel").classList.remove("hidden");
-  document.getElementById("managementPanel").classList.add("hidden");
-  document.getElementById("sellerCode").value = "";
-  document.getElementById("sellerMessage");
+  cancelEdit();
+  $("sellerPassword").value = "";
+  applySession(null);
   closeSeller();
 }
 
+/* ---------- Liste vendeur ---------- */
 function renderSellerProducts() {
-  const container = document.getElementById("sellerProducts");
+  const container = $("sellerProducts");
 
   if (!products.length) {
     container.innerHTML = '<p class="small">Tu n’as pas encore ajouté d’article.</p>';
@@ -651,195 +512,249 @@ function renderSellerProducts() {
     <div class="item-row">
       <div>
         <strong>${safeText(product.name)}</strong><br>
-        <span class="small">${formatPrice(product.price)}</span>
+        <span class="small">${formatPrice(product.price)} · Stock : ${Number(product.stock)}</span>
       </div>
       <div>
-        <button class="btn dark" onclick="editProduct('${product.id}')">Modifier</button>
-        <button class="btn dark" onclick="deleteProduct('${product.id}')">Supprimer</button>
+        <button class="btn dark" onclick="editProduct('${safeText(product.id)}')">Modifier</button>
+        <button class="btn dark" onclick="deleteProduct('${safeText(product.id)}')">Supprimer</button>
       </div>
     </div>
   `).join("");
 }
 
+/* ---------- Photos (Supabase Storage) ---------- */
 function resizeImage(file) {
   return new Promise((resolve, reject) => {
-    if (!file) return resolve("");
-
-    if (!file.type.startsWith("image/")) {
-      return reject(new Error("Choisis une image."));
-    }
+    if (!file) return resolve(null);
+    if (!file.type.startsWith("image/")) return reject(new Error("Choisis une image."));
 
     const reader = new FileReader();
-
     reader.onerror = () => reject(new Error("Impossible de lire cette image."));
-
     reader.onload = () => {
       const image = new Image();
-
       image.onerror = () => reject(new Error("Cette image ne peut pas être ouverte."));
-
       image.onload = () => {
         const maxSide = 800;
         const scale = Math.min(1, maxSide / Math.max(image.width, image.height));
         const canvas = document.createElement("canvas");
-
         canvas.width = Math.max(1, Math.round(image.width * scale));
         canvas.height = Math.max(1, Math.round(image.height * scale));
-
-        const context = canvas.getContext("2d");
-        context.drawImage(image, 0, 0, canvas.width, canvas.height);
-
-        resolve(canvas.toDataURL("image/jpeg", 0.72));
+        canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
+        canvas.toBlob(
+          blob => blob ? resolve(blob) : reject(new Error("Impossible de préparer l'image.")),
+          "image/jpeg", 0.78
+        );
       };
-
       image.src = reader.result;
     };
-
     reader.readAsDataURL(file);
   });
 }
 
-document.getElementById("productForm").addEventListener("submit", async event => {
+async function uploadImage(blob) {
+  const path = Date.now() + "-" + Math.random().toString(36).slice(2, 8) + ".jpg";
+  const { error } = await supabaseClient.storage
+    .from(BUCKET)
+    .upload(path, blob, { contentType: "image/jpeg", cacheControl: "31536000" });
+  if (error) throw error;
+  return supabaseClient.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+}
+
+function storagePathFromUrl(url) {
+  const match = String(url || "").match(/\/storage\/v1\/object\/public\/product-images\/(.+)$/);
+  return match ? decodeURIComponent(match[1]) : null;
+}
+
+async function removeImage(url) {
+  const path = storagePathFromUrl(url);
+  if (!path) return;
+  try {
+    const { error } = await supabaseClient.storage.from(BUCKET).remove([path]);
+    if (error) throw error;
+  } catch (error) {
+    console.warn("Photo non supprimée :", error);
+  }
+}
+
+/* ---------- Ajout / modification ---------- */
+function resetProductForm() {
+  $("productForm").reset();
+  $("itemStock").value = "1";
+}
+
+function cancelEdit() {
+  editingId = null;
+  resetProductForm();
+  $("formTitle").textContent = "Ajouter un article";
+  $("saveBtn").textContent = "Enregistrer l'article";
+  $("cancelEditBtn").classList.add("hidden");
+  $("photoHint").textContent = "Choisis une photo depuis ton téléphone. Les grandes images seront réduites automatiquement.";
+}
+
+$("productForm").addEventListener("submit", async event => {
   event.preventDefault();
+  if (!loggedIn || !supabaseClient) return;
 
-  if (!loggedIn) return;
-
-  const name = document.getElementById("itemName").value.trim();
-  const price = Number(document.getElementById("itemPrice").value);
-  const category = document.getElementById("itemCategory").value;
-  const stock = Number(document.getElementById("itemStock").value);
-  const description = document.getElementById("itemDescription").value.trim();
-  const file = document.getElementById("itemPhoto").files[0];
+  const name = $("itemName").value.trim();
+  const price = Number($("itemPrice").value);
+  const category = $("itemCategory").value;
+  const stock = Number($("itemStock").value);
+  const description = $("itemDescription").value.trim();
+  const file = $("itemPhoto").files[0];
 
   if (!name || !Number.isFinite(price) || price <= 0) {
     alert("Entre un nom et un prix valide.");
     return;
   }
-
-  if (!Number.isFinite(stock) || stock < 0) {
-    alert("Entre un stock valide.");
+  if (!Number.isInteger(stock) || stock < 0) {
+    alert("Entre un stock valide (nombre entier, 0 ou plus).");
     return;
   }
 
-  let photo = "";
+  const button = $("saveBtn");
+  button.disabled = true;
+  const wasEditing = editingId;
+  let newImageUrl = "";
 
   try {
-    photo = await resizeImage(file);
+    const blob = await resizeImage(file);
+    if (blob) newImageUrl = await uploadImage(blob);
+
+    const payload = { name, description, price, category, stock };
+    if (newImageUrl) payload.image_url = newImageUrl;
+
+    if (wasEditing) {
+      const previous = products.find(item => item.id === wasEditing);
+      const { data, error } = await supabaseClient
+        .from("products")
+        .update(payload)
+        .eq("id", Number(wasEditing))
+        .select();
+      if (error) throw error;
+      if (!data || data.length === 0) {
+        throw new Error("Modification refusée ou article introuvable (row-level security).");
+      }
+      if (newImageUrl && previous && previous.photo) await removeImage(previous.photo);
+    } else {
+      const { data, error } = await supabaseClient
+        .from("products")
+        .insert([{ ...payload, image_url: newImageUrl || null }])
+        .select();
+      if (error) throw error;
+      if (!data || data.length === 0) throw new Error("Article non enregistré.");
+    }
+
+    cancelEdit();
+    await reloadAll();
+    alert(wasEditing ? "Article modifié !" : "Article ajouté à la boutique !");
   } catch (error) {
-    alert(error.message);
-    return;
+    console.error("Erreur d'enregistrement :", error);
+    if (newImageUrl) await removeImage(newImageUrl);
+    alert("Impossible d'enregistrer l'article.\n" + friendlyError(error));
   }
-
-  const previous = editingId
-    ? products.find(product => product.id === editingId)
-    : null;
-
-  const product = {
-    id: editingId || (Date.now().toString(36) + Math.random().toString(36).slice(2, 7)),
-    name,
-    price,
-    category,
-    stock,
-    description,
-    photo: photo || (previous ? previous.photo : "")
-  };
-
-  const oldProducts = [...products];
-
-  if (editingId) {
-    products = products.map(item => item.id === editingId ? product : item);
-  } else {
-    products.unshift(product);
-  }
-
-  if (!saveProducts()) {
-    products = oldProducts;
-    return;
-  }
-
-  editingId = null;
-  document.getElementById("productForm").reset();
-  document.getElementById("itemStock").value = "1";
-
-  renderProducts();
-  renderSellerProducts();
-
-  alert("Article enregistré sur cet appareil !");
+  button.disabled = false;
 });
 
 function editProduct(id) {
   if (!loggedIn) return;
-
   const product = products.find(item => item.id === id);
   if (!product) return;
 
   editingId = id;
-  document.getElementById("itemName").value = product.name;
-  document.getElementById("itemPrice").value = product.price;
-  document.getElementById("itemCategory").value = product.category;
-  document.getElementById("itemStock").value = product.stock;
-  document.getElementById("itemDescription").value = product.description || "";
+  $("itemName").value = product.name;
+  $("itemPrice").value = product.price;
+  $("itemCategory").value = product.category;
+  $("itemStock").value = product.stock;
+  $("itemDescription").value = product.description || "";
+  $("itemPhoto").value = "";
 
-  document.getElementById("productForm").scrollIntoView({behavior:"smooth"});
+  $("formTitle").textContent = "Modifier l'article";
+  $("saveBtn").textContent = "Enregistrer les modifications";
+  $("cancelEditBtn").classList.remove("hidden");
+  $("photoHint").textContent = "Laisse vide pour garder la photo actuelle, ou choisis-en une nouvelle.";
+  $("productForm").scrollIntoView({ behavior: "smooth" });
 }
 
+/* ---------- Suppression ---------- */
 async function deleteProduct(id) {
-  if (!loggedIn) return;
-
+  if (!loggedIn || !supabaseClient) return;
   if (!confirm("Veux-tu vraiment supprimer cet article ?")) return;
 
+  const product = products.find(item => item.id === id);
+
   try {
-    const { error } = await supabaseClient
+    const { data, error } = await supabaseClient
       .from("products")
       .delete()
-      .eq("id", Number(id));
-
+      .eq("id", Number(id))
+      .select();
     if (error) throw error;
+    if (!data || data.length === 0) {
+      throw new Error("Suppression refusée ou article introuvable (row-level security).");
+    }
 
-    await loadData();
+    if (product && product.photo) await removeImage(product.photo);
+    if (editingId === id) cancelEdit();
 
-    renderProducts();
-    renderSellerProducts();
-
+    await reloadAll();
     alert("Article supprimé de la boutique !");
   } catch (error) {
     console.error("Erreur de suppression :", error);
-    alert("Impossible de supprimer cet article.");
-  }}
-
-  async function saveSettings() {
-if (!loggedIn) return;
-
-let whatsapp = document.getElementById("whatsappNumber").value.trim();
-whatsapp = whatsapp.replace(/[\s()+.-]/g, "");
-
-if (whatsapp && !/^\d{8,15}$/.test(whatsapp)) {
-alert("Vérifie le numéro WhatsApp. Utilise uniquement les chiffres avec l'indicatif du pays.");
-return;
+    alert("Impossible de supprimer cet article.\n" + friendlyError(error));
+  }
 }
 
-try {
-const { error } = await supabaseClient
-.from("shop_settings")
-.upsert(
-{
-id: 1,
-whatsapp: whatsapp
-},
-{ onConflict: "id" }
-);
+/* ---------- Réglages WhatsApp ---------- */
+async function saveSettings() {
+  if (!loggedIn || !supabaseClient) return;
 
-if (error) throw error;
+  let whatsapp = $("whatsappNumber").value.trim();
+  whatsapp = whatsapp.replace(/[\s()+.-]/g, "");
 
-settings = { whatsapp };
-alert("Réglages enregistrés dans la boutique !");
-
-  } catch (error) {
-    console.error("Erreur de suppression :", error);
-    alert("Impossible de supprimer cet article.");
+  if (whatsapp && !/^\d{8,15}$/.test(whatsapp)) {
+    alert("Vérifie le numéro WhatsApp. Utilise uniquement les chiffres avec l'indicatif du pays.");
+    return;
   }
+
+  const button = $("settingsBtn");
+  button.disabled = true;
+
+  try {
+    const { data, error } = await supabaseClient
+      .from("shop_settings")
+      .update({ whatsapp })
+      .eq("id", 1)
+      .select();
+    if (error) throw error;
+
+    if (!data || data.length === 0) {
+      const { error: insertError } = await supabaseClient
+        .from("shop_settings")
+        .insert([{ id: 1, whatsapp }]);
+      if (insertError) throw insertError;
     }
 
+    // Relecture depuis la base pour confirmer l'enregistrement
+    const { data: saved, error: readError } = await supabaseClient
+      .from("shop_settings")
+      .select("whatsapp")
+      .eq("id", 1)
+      .maybeSingle();
+    if (readError) throw readError;
+
+    settings = { whatsapp: saved?.whatsapp || "" };
+    $("whatsappNumber").value = settings.whatsapp;
+
+    if (settings.whatsapp !== whatsapp) throw new Error("Le numéro n'a pas été enregistré.");
+    alert("Réglages enregistrés dans la boutique !");
+  } catch (error) {
+    console.error("Erreur d'enregistrement des réglages :", error);
+    alert("Impossible d'enregistrer les réglages.\n" + friendlyError(error));
+  }
+  button.disabled = false;
+}
+
+/* ---------- Commande WhatsApp ---------- */
 function orderProduct(id) {
   const product = products.find(item => item.id === id);
   if (!product) return;
@@ -850,8 +765,7 @@ function orderProduct(id) {
   }
 
   if (!settings.whatsapp) {
-    alert("Le vendeur n'a pas encore configuré son numéro WhatsApp.");
-    openSeller();
+    alert("Les commandes par WhatsApp ne sont pas encore disponibles. Réessaie un peu plus tard.");
     return;
   }
 
@@ -862,18 +776,31 @@ function orderProduct(id) {
     "Quantité : 1\n" +
     "Est-ce disponible ?";
 
-  const url = "https://wa.me/" + settings.whatsapp +
-    "?text=" + encodeURIComponent(message);
-
+  const url = "https://wa.me/" + settings.whatsapp + "?text=" + encodeURIComponent(message);
   window.open(url, "_blank");
 }
 
-document.getElementById("year").textContent = new Date().getFullYear();
-
-loadData().then(() => {
+/* ---------- Démarrage ---------- */
+$("year").textContent = new Date().getFullYear();
 renderProducts();
-});
+
+(async () => {
+  await loadData();
+  renderProducts();
+
+  if (supabaseClient) {
+    try {
+      const { data } = await supabaseClient.auth.getSession();
+      applySession(data.session);
+    } catch (error) {
+      console.error("Erreur de session :", error);
+    }
+    supabaseClient.auth.onAuthStateChange((event, session) => {
+      if (event === "SIGNED_OUT") applySession(null);
+    });
+  }
+})();
 </script>
 
 </body>
-  </html>
+</html>
