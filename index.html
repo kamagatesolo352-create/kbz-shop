@@ -807,25 +807,37 @@ async function deleteProduct(id) {
     alert("Impossible de supprimer cet article.");
   }}
 
-function saveSettings() {
-  if (!loggedIn) return;
+  async function saveSettings() {
+if (!loggedIn) return;
 
-  let whatsapp = document.getElementById("whatsappNumber").value.trim();
-  whatsapp = whatsapp.replace(/[\s()+.-]/g, "");
+let whatsapp = document.getElementById("whatsappNumber").value.trim();
+whatsapp = whatsapp.replace(/[\s()+.-]/g, "");
 
-  if (whatsapp && !/^\d{8,15}$/.test(whatsapp)) {
-    alert("Vérifie le numéro WhatsApp. Utilise uniquement les chiffres avec l'indicatif du pays.");
-    return;
-  }
+if (whatsapp && !/^\d{8,15}$/.test(whatsapp)) {
+alert("Vérifie le numéro WhatsApp. Utilise uniquement les chiffres avec l'indicatif du pays.");
+return;
+}
 
-  settings = { whatsapp };
+try {
+const { error } = await supabaseClient
+.from("shop_settings")
+.upsert(
+{
+id: 1,
+whatsapp: whatsapp
+},
+{ onConflict: "id" }
+);
 
-  try {
-    localStorage.setItem("kbz_settings", JSON.stringify(settings));
-    alert("Réglages enregistrés sur cet appareil !");
-  } catch (error) {
-    alert("Impossible d'enregistrer les réglages.");
-  }
+if (error) throw error;
+
+settings = { whatsapp };
+alert("Réglages enregistrés dans la boutique !");
+
+} catch (error) {
+console.error("Erreur des réglages :", error);
+alert("Impossible d'enregistrer les réglages dans Supabase.");
+}
 }
 
 function orderProduct(id) {
