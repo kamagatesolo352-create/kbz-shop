@@ -851,8 +851,9 @@ function orderProduct(id) {
 
 document.getElementById("year").textContent = new Date().getFullYear();
 
-loadData();
+loadData().then(() => {
 renderProducts();
+});
 </script>
 
 </body>
