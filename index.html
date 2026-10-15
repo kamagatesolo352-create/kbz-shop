@@ -834,11 +834,11 @@ if (error) throw error;
 settings = { whatsapp };
 alert("Réglages enregistrés dans la boutique !");
 
-} catch (error) {
-console.error("Erreur des réglages :", error);
-alert("Impossible d'enregistrer les réglages dans Supabase.");
-}
-}
+  } catch (error) {
+    console.error("Erreur de suppression :", error);
+    alert("Impossible de supprimer cet article.");
+  }
+    }
 
 function orderProduct(id) {
   const product = products.find(item => item.id === id);
