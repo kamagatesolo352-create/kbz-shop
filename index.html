@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#101010">
+<title>KBZ SHOP | Ton style, ton choix</title>
+
+<style>
+:root {
+  --bg: #101010;
+  --card: #1b1b1b;
+  --gold: #e8bd62;
+  --text: #ffffff;
+  --muted: #b8b8b8;
+  --border: #333333;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+header {
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #101010;
+}
+
+.logo {
+  color: var(--gold);
+  font-size: 23px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.logo span {
+  color: white;
+}
+
+button, input, select, textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.btn {
+  border: none;
+  border-radius: 8px;
+  padding: 11px 14px;
+  font-weight: bold;
+}
+
+.gold {
+  background: var(--gold);
+  color: #151515;
+}
+
+.dark {
+  background: #292929;
+  color: white;
+  border: 1px solid #444;
+}
+
+header .btn {
+  padding: 9px 11px;
+  font-size: 13px;
+}
+
+.hero {
+  padding: 55px 20px 48px;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at top, #40331d 0%, #191713 38%, #101010 75%);
+}
+
+.hero .tag {
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.hero h1 {
+  font-size: clamp(34px, 8vw, 55px);
+  line-height: 1.1;
+  margin: 18px 0;
+}
+
+.hero h1 span {
+  color: var(--gold);
+}
+
+.hero p {
+  color: #d0d0d0;
+  max-width: 480px;
+  margin: 0 auto 25px;
+  line-height: 1.7;
+}
+
+.section {
+  padding: 28px 16px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.section-title {
+  font-size: 25px;
+  margin: 0 0 8px;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 0 0 22px;
+  font-size: 14px;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 13px;
+  border-radius: 8px;
+  border: 1px solid #414141;
+  background: #202020;
+  color: white;
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--gold);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.product {
+  background: var(--card);
+  border: 1px solid #2d2d2d;
+  border-radius: 12px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.product img {
+  width: 100%;
+  height: 155px;
+  object-fit: cover;
+  background: #292929;
+  display: block;
+}
+
+.product-body {
+  padding: 12px;
+}
+
+.category {
+  color: var(--gold);
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+.product h3 {
+  font-size: 15px;
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+}
+
+.description {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+  min-height: 18px;
+  overflow-wrap: anywhere;
+}
+
+.price {
+  color: var(--gold);
+  font-size: 17px;
+  font-weight: bold;
+  margin: 12px 0;
+}
+
+.stock {
+  font-size: 11px;
+  color: #bdbdbd;
+  margin-bottom: 10px;
+}
+
+.product .btn {
+  width: 100%;
+  padding: 10px 5px;
+  font-size: 12px;
+}
+
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--muted);
+  padding: 35px 10px;
+  background: var(--card);
+  border-radius: 10px;
+}
+
+.notice {
+  margin-top: 20px;
+  padding: 14px;
+  background: #211e17;
+  border: 1px solid #594a2d;
+  border-radius: 8px;
+  color: #e9d9b5;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.seller {
+  max-width: 650px;
+  margin: 20px auto;
+  padding: 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.seller h2 {
+  color: var(--gold);
+  margin-top: 0;
+}
+
+.seller label {
+  display: block;
+  margin: 15px 0 7px;
+  font-size: 13px;
+  color: #ddd;
+}
+
+.seller .btn {
+  margin-top: 12px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.item-row {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.item-row strong {
+  overflow-wrap: anywhere;
+}
+
+.item-row button {
+  margin: 3px 0;
+}
+
+.small {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.hidden {
+  display: none !important;
+}
+
+footer {
+  margin-top: 35px;
+  border-top: 1px solid var(--border);
+  padding: 27px 16px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+footer strong {
+  color: var(--gold);
+}
+
+@media (min-width: 600px) {
+  .filters {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .product img {
+    height: 210px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero {
+    padding: 75px 20px 65px;
+  }
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">KBZ <span>SHOP</span></div>
+  <button class="btn dark" onclick="openSeller()">Espace vendeur</button>
+</header>
+
+<section class="hero">
+  <div class="tag">BIENVENUE CHEZ KBZ SHOP</div>
+  <h1>Ton style,<br><span>ton choix.</span></h1>
+  <p>
+    Vêtements, chaussures et accessoires.
+    Découvre les articles disponibles et commande facilement.
+  </p>
+  <button class="btn gold" onclick="document.getElementById('catalogue').scrollIntoView({behavior:'smooth'})">
+    Découvrir la boutique ↓
+  </button>
+</section>
+
+<main class="section" id="catalogue">
+  <h2 class="section-title">Nos articles</h2>
+  <p class="subtitle">Trouve ton prochain coup de cœur.</p>
+
+  <div class="filters">
+    <input id="search" type="search" placeholder="Rechercher un article..." oninput="renderProducts()">
+    <select id="categoryFilter" onchange="renderProducts()">
+      <option value="">Toutes les catégories</option>
+      <option value="Vêtements">Vêtements</option>
+      <option value="Chaussures">Chaussures</option>
+      <option value="Accessoires">Accessoires</option>
+      <option value="Autres">Autres</option>
+    </select>
+  </div>
+
+  <div class="grid" id="products"></div>
+
+  <div class="notice">
+    <strong>Comment commander ?</strong><br>
+    Choisis un article et appuie sur « Commander sur WhatsApp ».
+    Tu pourras confirmer ta commande avec le vendeur.
+  </div>
+</main>
+
+<section class="section hidden" id="sellerSection">
+  <div class="seller">
+    <h2>Espace vendeur KBZ SHOP</h2>
+
+    <div id="loginPanel">
+      <p class="small">Entre ton code vendeur pour accéder à la gestion de la boutique.</p>
+      <label for="sellerCode">Code vendeur</label>
+      <input id="sellerCode" type="password" inputmode="numeric" placeholder="Ton code vendeur">
+      <button class="btn gold" onclick="loginSeller()">Accéder à mon espace</button>
+      <button class="btn dark" onclick="closeSeller()">Fermer</button>
+      <p class="small" id="loginMessage"></p>
+    </div>
+
+    <div id="managementPanel" class="hidden">
+      <h3>Ajouter un article</h3>
+
+      <form id="productForm">
+        <label for="itemName">Nom de l'article *</label>
+        <input id="itemName" required maxlength="100" placeholder="Ex. : Sneakers blanches">
+
+        <div class="form-grid">
+          <div>
+            <label for="itemPrice">Prix en FCFA *</label>
+            <input id="itemPrice" type="number" min="1" step="1" required placeholder="Ex. : 15000">
+          </div>
+          <div>
+            <label for="itemCategory">Catégorie</label>
+            <select id="itemCategory">
+              <option>Vêtements</option>
+              <option>Chaussures</option>
+              <option>Accessoires</option>
+              <option>Autres</option>
+            </select>
+          </div>
+        </div>
+
+        <label for="itemStock">Stock disponible</label>
+        <input id="itemStock" type="number" min="0" step="1" value="1">
+
+        <label for="itemDescription">Description</label>
+        <textarea id="itemDescription" rows="3" maxlength="500" placeholder="Décris ton article..."></textarea>
+
+        <label for="itemPhoto">Photo de l'article (facultatif)</label>
+        <input id="itemPhoto" type="file" accept="image/*">
+        <p class="small">Choisis une photo depuis ton téléphone. Les grandes images seront réduites automatiquement.</p>
+
+        <button class="btn gold" type="submit">Enregistrer l'article</button>
+      </form>
+
+      <h3>Mes articles publiés</h3>
+      <div id="sellerProducts"></div>
+
+      <h3>Réglages de la boutique</h3>
+      <label for="whatsappNumber">Numéro WhatsApp du vendeur</label>
+      <input id="whatsappNumber" inputmode="tel" placeholder="Ex. : 2250700000000">
+      <p class="small">Pour la Côte d'Ivoire, ajoute l'indicatif 225 avant ton numéro, sans le signe +.</p>
+      <button class="btn gold" onclick="saveSettings()">Enregistrer les réglages</button>
+
+      <button class="btn dark" onclick="logoutSeller()">Quitter l'espace vendeur</button>
+
+      <p class="small">
+        Les produits et réglages de cette version sont enregistrés dans
+        le navigateur de cet appareil. Ils ne sont pas encore partagés
+        automatiquement avec les autres visiteurs.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>KBZ SHOP</strong><br>
+  Ton style, ton choix.<br>
+  © <span id="year"></span> KBZ SHOP — Tous droits réservés.
+</footer>
+
+<script>
+const SELLER_CODE = "5574";
+
+const PLACEHOLDER_IMAGE =
+  "data:image/svg+xml;charset=UTF-8," +
+  encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="600" height="400">
+      <rect width="100%" height="100%" fill="#292929"/>
+      <text x="50%" y="46%" font-size="42" fill="#e8bd62"
+        text-anchor="middle" font-family="Arial">KBZ SHOP</text>
+      <text x="50%" y="60%" font-size="20" fill="#cccccc"
+        text-anchor="middle" font-family="Arial">Photo à venir</text>
+    </svg>
+  `);
+
+let products = [];
+let settings = { whatsapp: "" };
+let loggedIn = false;
+let editingId = null;
+
+function loadData() {
+  try {
+    products = JSON.parse(localStorage.getItem("kbz_products") || "[]");
+    settings = JSON.parse(localStorage.getItem("kbz_settings") || '{"whatsapp":""}');
+  } catch (error) {
+    products = [];
+    settings = { whatsapp: "" };
+  }
+}
+
+function saveProducts() {
+  try {
+    localStorage.setItem("kbz_products", JSON.stringify(products));
+    return true;
+  } catch (error) {
+    alert("Le stockage du téléphone est plein. Essaie une photo plus petite.");
+    return false;
+  }
+}
+
+function formatPrice(price) {
+  return Number(price).toLocaleString("fr-FR") + " FCFA";
+}
+
+function safeText(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[char]);
+}
+
+function renderProducts() {
+  const container = document.getElementById("products");
+  const search = document.getElementById("search").value.toLowerCase().trim();
+  const category = document.getElementById("categoryFilter").value;
+
+  const filtered = products.filter(product => {
+    const matchesSearch =
+      (product.name + " " + product.description).toLowerCase().includes(search);
+    const matchesCategory = !category || product.category === category;
+    return matchesSearch && matchesCategory;
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div class="empty">
+        <h3>Aucun article pour le moment</h3>
+        <p>Les nouveaux articles apparaîtront ici lorsqu'ils seront ajoutés.</p>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = filtered.map(product => `
+    <article class="product">
+      <img src="${product.photo || PLACEHOLDER_IMAGE}"
+           alt="${safeText(product.name)}"
+           onerror="this.onerror=null;this.src=PLACEHOLDER_IMAGE">
+      <div class="product-body">
+        <div class="category">${safeText(product.category)}</div>
+        <h3>${safeText(product.name)}</h3>
+        <div class="description">${safeText(product.description || "")}</div>
+        <div class="price">${formatPrice(product.price)}</div>
+        <div class="stock">
+          ${Number(product.stock) > 0
+            ? "Disponible : " + Number(product.stock)
+            : "Rupture de stock"}
+        </div>
+        <button class="btn gold"
+          ${Number(product.stock) <= 0 ? "disabled" : ""}
+          onclick="orderProduct('${product.id}')">
+          Commander sur WhatsApp
+        </button>
+      </div>
+    </article>
+  `).join("");
+}
+
+function openSeller() {
+  document.getElementById("sellerSection").classList.remove("hidden");
+  document.getElementById("sellerSection").scrollIntoView({behavior:"smooth"});
+}
+
+function closeSeller() {
+  document.getElementById("sellerSection").classList.add("hidden");
+}
+
+function loginSeller() {
+  const entered = document.getElementById("sellerCode").value;
+  if (entered !== SELLER_CODE) {
+    document.getElementById("loginMessage").textContent = "Code incorrect. Réessaie.";
+    return;
+  }
+
+  loggedIn = true;
+  document.getElementById("loginPanel").classList.add("hidden");
+  document.getElementById("managementPanel").classList.remove("hidden");
+  document.getElementById("whatsappNumber").value = settings.whatsapp || "";
+  renderSellerProducts();
+}
+
+function logoutSeller() {
+  loggedIn = false;
+  editingId = null;
+  document.getElementById("productForm").reset();
+  document.getElementById("loginPanel").classList.remove("hidden");
+  document.getElementById("managementPanel").classList.add("hidden");
+  document.getElementById("sellerCode").value = "";
+  document.getElementById("sellerMessage");
+  closeSeller();
+}
+
+function renderSellerProducts() {
+  const container = document.getElementById("sellerProducts");
+
+  if (!products.length) {
+    container.innerHTML = '<p class="small">Tu n’as pas encore ajouté d’article.</p>';
+    return;
+  }
+
+  container.innerHTML = products.map(product => `
+    <div class="item-row">
+      <div>
+        <strong>${safeText(product.name)}</strong><br>
+        <span class="small">${formatPrice(product.price)}</span>
+      </div>
+      <div>
+        <button class="btn dark" onclick="editProduct('${product.id}')">Modifier</button>
+        <button class="btn dark" onclick="deleteProduct('${product.id}')">Supprimer</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function resizeImage(file) {
+  return new Promise((resolve, reject) => {
+    if (!file) return resolve("");
+
+    if (!file.type.startsWith("image/")) {
+      return reject(new Error("Choisis une image."));
+    }
+
+    const reader = new FileReader();
+
+    reader.onerror = () => reject(new Error("Impossible de lire cette image."));
+
+    reader.onload = () => {
+      const image = new Image();
+
+      image.onerror = () => reject(new Error("Cette image ne peut pas être ouverte."));
+
+      image.onload = () => {
+        const maxSide = 800;
+        const scale = Math.min(1, maxSide / Math.max(image.width, image.height));
+        const canvas = document.createElement("canvas");
+
+        canvas.width = Math.max(1, Math.round(image.width * scale));
+        canvas.height = Math.max(1, Math.round(image.height * scale));
+
+        const context = canvas.getContext("2d");
+        context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+        resolve(canvas.toDataURL("image/jpeg", 0.72));
+      };
+
+      image.src = reader.result;
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
+
+document.getElementById("productForm").addEventListener("submit", async event => {
+  event.preventDefault();
+
+  if (!loggedIn) return;
+
+  const name = document.getElementById("itemName").value.trim();
+  const price = Number(document.getElementById("itemPrice").value);
+  const category = document.getElementById("itemCategory").value;
+  const stock = Number(document.getElementById("itemStock").value);
+  const description = document.getElementById("itemDescription").value.trim();
+  const file = document.getElementById("itemPhoto").files[0];
+
+  if (!name || !Number.isFinite(price) || price <= 0) {
+    alert("Entre un nom et un prix valide.");
+    return;
+  }
+
+  if (!Number.isFinite(stock) || stock < 0) {
+    alert("Entre un stock valide.");
+    return;
+  }
+
+  let photo = "";
+
+  try {
+    photo = await resizeImage(file);
+  } catch (error) {
+    alert(error.message);
+    return;
+  }
+
+  const previous = editingId
+    ? products.find(product => product.id === editingId)
+    : null;
+
+  const product = {
+    id: editingId || (Date.now().toString(36) + Math.random().toString(36).slice(2, 7)),
+    name,
+    price,
+    category,
+    stock,
+    description,
+    photo: photo || (previous ? previous.photo : "")
+  };
+
+  const oldProducts = [...products];
+
+  if (editingId) {
+    products = products.map(item => item.id === editingId ? product : item);
+  } else {
+    products.unshift(product);
+  }
+
+  if (!saveProducts()) {
+    products = oldProducts;
+    return;
+  }
+
+  editingId = null;
+  document.getElementById("productForm").reset();
+  document.getElementById("itemStock").value = "1";
+
+  renderProducts();
+  renderSellerProducts();
+
+  alert("Article enregistré sur cet appareil !");
+});
+
+function editProduct(id) {
+  if (!loggedIn) return;
+
+  const product = products.find(item => item.id === id);
+  if (!product) return;
+
+  editingId = id;
+  document.getElementById("itemName").value = product.name;
+  document.getElementById("itemPrice").value = product.price;
+  document.getElementById("itemCategory").value = product.category;
+  document.getElementById("itemStock").value = product.stock;
+  document.getElementById("itemDescription").value = product.description || "";
+
+  document.getElementById("productForm").scrollIntoView({behavior:"smooth"});
+}
+
+function deleteProduct(id) {
+  if (!loggedIn) return;
+
+  if (!confirm("Veux-tu vraiment supprimer cet article ?")) return;
+
+  const oldProducts = [...products];
+  products = products.filter(product => product.id !== id);
+
+  if (!saveProducts()) {
+    products = oldProducts;
+    return;
+  }
+
+  renderProducts();
+  renderSellerProducts();
+}
+
+function saveSettings() {
+  if (!loggedIn) return;
+
+  let whatsapp = document.getElementById("whatsappNumber").value.trim();
+  whatsapp = whatsapp.replace(/[\s()+.-]/g, "");
+
+  if (whatsapp && !/^\d{8,15}$/.test(whatsapp)) {
+    alert("Vérifie le numéro WhatsApp. Utilise uniquement les chiffres avec l'indicatif du pays.");
+    return;
+  }
+
+  settings = { whatsapp };
+
+  try {
+    localStorage.setItem("kbz_settings", JSON.stringify(settings));
+    alert("Réglages enregistrés sur cet appareil !");
+  } catch (error) {
+    alert("Impossible d'enregistrer les réglages.");
+  }
+}
+
+function orderProduct(id) {
+  const product = products.find(item => item.id === id);
+  if (!product) return;
+
+  if (Number(product.stock) <= 0) {
+    alert("Cet article est actuellement indisponible.");
+    return;
+  }
+
+  if (!settings.whatsapp) {
+    alert("Le vendeur n'a pas encore configuré son numéro WhatsApp.");
+    openSeller();
+    return;
+  }
+
+  const message =
+    "Bonjour KBZ SHOP ! Je souhaite commander :\n" +
+    "Article : " + product.name + "\n" +
+    "Prix : " + formatPrice(product.price) + "\n" +
+    "Quantité : 1\n" +
+    "Est-ce disponible ?";
+
+  const url = "https://wa.me/" + settings.whatsapp +
+    "?text=" + encodeURIComponent(message);
+
+  window.open(url, "_blank");
+}
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+loadData();
+renderProducts();
+</script>
+
+</body>
+  </html>
