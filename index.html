@@ -390,7 +390,8 @@ footer strong {
     <div id="loginPanel">
       <p class="small">Entre ton code vendeur pour accéder à la gestion de la boutique.</p>
       <label for="sellerCode">Code vendeur</label>
-      <input id="sellerCode" type="password" inputmode="numeric" placeholder="Ton code vendeur">
+      <input id="sellerEmail" type="email" placeholder="Ton adresse e-mail" autocomplete="username">
+<input id="sellerPassword" type="password" placeholder="Ton mot de passe" autocomplete="current-password">
       <button class="btn gold" onclick="loginSeller()">Accéder à mon espace</button>
       <button class="btn dark" onclick="closeSeller()">Fermer</button>
       <p class="small" id="loginMessage"></p>
