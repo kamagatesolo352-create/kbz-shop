@@ -461,7 +461,12 @@ footer strong {
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   
   <script>
-const SELLER_CODE = "5574";
+const SELLER_CODE = "5574";const SUPABASE_URL = "https://ojelswkxcgyyayonvdnk.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_ZNTeFqr0eG6344aaivSzLQ_iOnk8mPW";
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
 
 const PLACEHOLDER_IMAGE =
   "data:image/svg+xml;charset=UTF-8," +
