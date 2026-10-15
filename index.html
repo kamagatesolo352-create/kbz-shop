@@ -574,10 +574,20 @@ function closeSeller() {
   document.getElementById("sellerSection").classList.add("hidden");
 }
 
-function loginSeller() {
-  const entered = document.getElementById("sellerCode").value;
-  if (entered !== SELLER_CODE) {
-    document.getElementById("loginMessage").textContent = "Code incorrect. Réessaie.";
+async function loginSeller() {
+  const email = document.getElementById("sellerEmail").value.trim();
+  const password = document.getElementById("sellerPassword").value;
+  const message = document.getElementById("loginMessage");
+
+  message.textContent = "Connexion en cours...";
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
+
+  if (error) {
+    message.textContent = "Connexion impossible. Vérifie ton e-mail et ton mot de passe.";
     return;
   }
 
@@ -586,6 +596,7 @@ function loginSeller() {
   document.getElementById("managementPanel").classList.remove("hidden");
   document.getElementById("whatsappNumber").value = settings.whatsapp || "";
   renderSellerProducts();
+    }
 }
 
 function logoutSeller() {
