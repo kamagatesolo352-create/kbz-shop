@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#2447e8">
+<title>Activer mon compte | KBZ SHOP</title>
+<style>
+:root{--brand:#2447e8;--brand-soft:#eaeffe;--ink:#0f172a;--muted:#5b6579;--line:#e4e8f1;--soft:#f4f6fc;--danger:#b42318}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Avenir Next","Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--soft);line-height:1.55}
+button,input{font:inherit}
+.wrap{max-width:480px;margin:0 auto;padding:22px 16px}
+.logo{font-weight:800;font-size:1.3rem}
+.logo span{background:var(--brand);color:#fff;padding:2px 9px;border-radius:9px;margin-right:4px}
+.card{background:#fff;border:1.5px solid var(--line);border-radius:18px;padding:20px;margin-top:18px}
+h1{font-size:1.5rem;margin:0 0 6px}
+.small{font-size:.88rem;color:var(--muted);margin:0}
+label{display:block;font-weight:700;font-size:.88rem;margin:14px 0 6px}
+input[type=text],input[type=password]{width:100%;padding:13px;border:1.5px solid var(--line);border-radius:12px;outline:none}
+input:focus{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+.code{font-size:1.6rem;letter-spacing:.3em;text-align:center}
+.check{display:flex;gap:10px;align-items:center;font-weight:600}
+.check input{width:20px;height:20px}
+.btn{width:100%;border:0;border-radius:12px;padding:14px;font-weight:800;background:var(--brand);color:#fff;margin-top:16px;text-align:center;text-decoration:none;display:block}
+.btn:disabled{opacity:.5}
+.err{background:#fdecea;color:var(--danger);border-radius:12px;padding:10px 12px;font-weight:700;margin-top:14px}
+.ok{background:#dcf5e5;color:#116b38;border-radius:12px;padding:12px;font-weight:700;margin-top:14px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="logo"><span>KBZ</span>SHOP</div>
+  <div class="card">
+    <h1>Activer mon compte</h1>
+    <p class="small">Tu as été invité(e) à rejoindre l'équipe KBZ SHOP. Entre le code à 6 chiffres que l'administrateur t'a donné séparément, puis choisis ton mot de passe personnel.</p>
+
+    <div class="err hidden" id="invalid">Ce lien est invalide ou incomplet. Rouvre le lien reçu sur WhatsApp, ou demande une nouvelle invitation à l'administrateur.</div>
+
+    <form id="form" novalidate>
+      <label for="code">Code à 6 chiffres</label>
+      <input id="code" class="code" type="text" inputmode="numeric" maxlength="7" autocomplete="one-time-code" placeholder="000000">
+      <label for="pw">Mot de passe (10 caractères minimum)</label>
+      <input id="pw" type="password" autocomplete="new-password">
+      <label for="pw2">Confirme le mot de passe</label>
+      <input id="pw2" type="password" autocomplete="new-password">
+      <label class="check"><input type="checkbox" id="show"> Afficher les mots de passe</label>
+      <div class="err hidden" id="msg" role="alert"></div>
+      <button class="btn" id="btn" type="submit">Activer mon compte</button>
+    </form>
+
+    <div id="done" class="hidden">
+      <div class="ok">✅ Ton compte est activé.</div>
+      <p class="small" style="margin-top:12px">Ton adresse de connexion est <strong id="doneEmail"></strong>, avec le mot de passe que tu viens de choisir. L'administrateur te confirmera quand ton espace de travail sera prêt.</p>
+      <a class="btn" href="./">Aller à la boutique</a>
+    </div>
+  </div>
+  <p class="small" style="margin-top:14px">Ne partage jamais ton mot de passe, même avec l'administrateur.</p>
+</div>
+
+<script>
+const FN_URL = "https://ojelswkxcgyyayonvdnk.supabase.co/functions/v1/rapid-handler";
+const KEY = "sb_publishable_ZNTeFqr0eG6344aaivSzLQ_iOnk8mPW";
+const $ = id => document.getElementById(id);
+
+let token = "";
+const m = location.hash.match(/[#&]t=([0-9a-f]{48})/);
+if (m) {
+  token = m[1];
+  try { sessionStorage.setItem("kbz_invite", token); } catch (e) {}
+  history.replaceState(null, "", location.pathname);
+} else {
+  try { token = sessionStorage.getItem("kbz_invite") || ""; } catch (e) {}
+}
+if (!/^[0-9a-f]{48}$/.test(token)) {
+  $("invalid").classList.remove("hidden");
+  $("form").classList.add("hidden");
+}
+
+$("show").addEventListener("change", e => {
+  $("pw").type = e.target.checked ? "text" : "password";
+  $("pw2").type = e.target.checked ? "text" : "password";
+});
+
+function showError(text) { $("msg").textContent = text; $("msg").classList.remove("hidden"); }
+
+let busy = false;
+$("form").addEventListener("submit", async e => {
+  e.preventDefault();
+  if (busy) return;
+  $("msg").classList.add("hidden");
+
+  const code = $("code").value.replace(/\D/g, "");
+  const pw = $("pw").value;
+  if (code.length !== 6) { showError("Entre le code à 6 chiffres."); return; }
+  if (pw.length < 10) { showError("Le mot de passe doit contenir au moins 10 caractères."); return; }
+  if (pw !== $("pw2").value) { showError("Les deux mots de passe ne sont pas identiques."); return; }
+
+  busy = true;
+  $("btn").disabled = true;
+  $("btn").textContent = "Activation en cours...";
+  try {
+    const res = await fetch(FN_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "apikey": KEY },
+      body: JSON.stringify({ token, code, password: pw })
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.ok) {
+      showError(data.error || "Activation impossible. Réessaie ou contacte l'administrateur.");
+    } else {
+      try { sessionStorage.removeItem("kbz_invite"); } catch (e) {}
+      token = "";
+      $("pw").value = ""; $("pw2").value = ""; $("code").value = "";
+      $("doneEmail").textContent = data.email;
+      $("form").classList.add("hidden");
+      $("done").classList.remove("hidden");
+    }
+  } catch (error) {
+    showError("Connexion impossible. Vérifie ton réseau puis réessaie.");
+  }
+  busy = false;
+  $("btn").disabled = false;
+  $("btn").textContent = "Activer mon compte";
+});
+</script>
+</body>
+  </html>
