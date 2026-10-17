@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#2447e8">
+<title>Équipe | KBZ SHOP</title>
+<style>
+:root{--brand:#2447e8;--brand-dark:#1a33b8;--brand-soft:#eaeffe;--sun:#ffc93c;--ink:#0f172a;--muted:#5b6579;--line:#e4e8f1;--soft:#f4f6fc;--danger:#b42318;--ok:#116b38;--radius:18px}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Avenir Next","Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);background:var(--soft);line-height:1.55}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.5;cursor:not-allowed}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px}
+.hidden{display:none!important}
+.top{background:#fff;border-bottom:1px solid var(--line)}
+.bar{display:flex;justify-content:space-between;align-items:center;height:62px}
+.logo{font-weight:800;font-size:1.25rem;text-decoration:none;color:var(--ink)}
+.logo span{background:var(--brand);color:#fff;padding:2px 9px;border-radius:9px;margin-right:4px}
+.link{color:var(--brand);font-weight:700;text-decoration:none}
+h1{font-size:1.8rem;margin:22px 0 6px}
+h2{font-size:1.2rem;margin:0 0 6px}
+.card{background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);padding:18px;margin:14px 0}
+.small{font-size:.85rem;color:var(--muted);margin:0}
+label{display:block;font-weight:700;font-size:.88rem;margin:12px 0 6px}
+input,select{width:100%;padding:12px 13px;border:1.5px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);outline:none}
+input:focus,select:focus{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft)}
+.btn{display:inline-block;border:0;border-radius:12px;padding:12px 18px;font-weight:800;text-align:center;text-decoration:none;margin-top:12px;margin-right:6px}
+.blue{background:var(--brand);color:#fff}
+.green{background:#128c4a;color:#fff}
+.line{background:#fff;color:var(--ink);border:1.5px solid var(--line)}
+.danger{color:var(--danger)}
+.mini{padding:8px 12px;margin:6px 6px 0 0;font-size:.88rem}
+.row{display:grid;gap:0 12px}
+@media(min-width:600px){.row{grid-template-columns:1fr 1fr}}
+.err{background:#fdecea;color:var(--danger);border-radius:12px;padding:10px 12px;font-weight:700;margin-top:12px}
+.note{background:#fff8e1;border-radius:12px;padding:10px 12px;font-size:.9rem;margin-top:12px}
+.code{font-size:2.2rem;font-weight:800;letter-spacing:.2em;text-align:center;background:var(--brand-soft);color:var(--brand);border-radius:14px;padding:12px;margin:10px 0}
+textarea{width:100%;min-height:210px;padding:12px;border:1.5px solid var(--line);border-radius:12px;font:inherit;font-size:.92rem;background:var(--soft)}
+.item{border-top:1px solid var(--line);padding:12px 0}
+.item:first-child{border-top:0}
+.stat{display:inline-block;font-size:.75rem;font-weight:800;border-radius:999px;padding:3px 10px;background:#e6e9ef;color:#3a4256}
+.stat.ok{background:#dcf5e5;color:var(--ok)}
+.stat.wait{background:#fff3cd;color:#8a5a00}
+.stat.bad{background:#fde2e0;color:var(--danger)}
+.toast{position:fixed;left:50%;top:70px;transform:translate(-50%,-140px);background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-weight:700;z-index:50;transition:transform .25s;width:max-content;max-width:calc(100% - 32px);text-align:center}
+.toast.show{transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap bar">
+  <a class="logo" href="./"><span>KBZ</span>SHOP</a>
+  <a class="link" href="./">← Boutique</a>
+</div></header>
+
+<main class="wrap">
+  <h1>Équipe</h1>
+
+  <section class="card" id="loginBox">
+    <h2>Connexion administrateur</h2>
+    <p class="small">Cette page est réservée à l'administrateur de KBZ SHOP.</p>
+    <form id="loginForm">
+      <label for="email">Adresse e-mail</label>
+      <input id="email" type="email" required autocomplete="username">
+      <label for="password">Mot de passe</label>
+      <input id="password" type="password" required autocomplete="current-password">
+      <button class="btn blue" type="submit" id="loginBtn">Se connecter</button>
+    </form>
+    <div class="err hidden" id="loginErr"></div>
+  </section>
+
+  <div id="app" class="hidden">
+    <section class="card">
+      <h2>Inviter un collaborateur</h2>
+      <p class="small">Un lien personnel, temporaire et à usage unique sera préparé pour WhatsApp. Le collaborateur choisira lui-même son mot de passe.</p>
+      <form id="inviteForm">
+        <div class="row">
+          <div><label for="i_name">Nom</label><input id="i_name" required maxlength="80"></div>
+          <div><label for="i_email">Adresse e-mail</label><input id="i_email" type="email" required maxlength="254"></div>
+        </div>
+        <div class="row">
+          <div><label for="i_wa">Numéro WhatsApp</label><input id="i_wa" inputmode="tel" required placeholder="Ex. : 0701020304"></div>
+          <div><label for="i_role">Rôle</label>
+            <select id="i_role">
+              <option value="order_manager">Gestionnaire des commandes</option>
+              <option value="product_manager">Gestionnaire des produits</option>
+            </select>
+          </div>
+        </div>
+        <label for="i_hours">Durée de validité du lien</label>
+        <select id="i_hours">
+          <option value="24">24 heures</option>
+          <option value="48" selected>48 heures</option>
+          <option value="72">72 heures</option>
+          <option value="168">7 jours</option>
+        </select>
+        <button class="btn blue" type="submit" id="inviteBtn">Préparer l'invitation WhatsApp</button>
+      </form>
+      <div class="err hidden" id="inviteErr"></div>
+    </section>
+
+    <section class="card hidden" id="resultBox">
+      <h2>Invitation prête pour <span id="r_name"></span></h2>
+      <p class="small" id="r_state"></p>
+      <p style="margin:12px 0 0"><strong>Code à donner séparément</strong> (à voix haute ou dans un autre message, jamais dans le même message que le lien) :</p>
+      <div class="code" id="r_code"></div>
+      <div class="note">⚠️ Ce code ne s'affichera plus quand vous quitterez cette carte. S'il est perdu, révoquez l'invitation et créez-en une nouvelle.</div>
+      <label for="r_text">Message WhatsApp (modifiable avant l'envoi)</label>
+      <textarea id="r_text"></textarea>
+      <a class="btn green" id="r_wa" target="_blank" rel="noopener" href="#">Ouvrir WhatsApp</a>
+      <button class="btn line" type="button" id="r_copy">Copier le message</button>
+      <button class="btn line" type="button" id="r_sent">J'ai envoyé le message</button>
+      <button class="btn line" type="button" id="r_close">Terminer</button>
+      <p class="small" style="margin-top:10px">Ouvrir WhatsApp ne prouve pas que le message est parti : confirmez avec « J'ai envoyé le message ».</p>
+    </section>
+
+    <section class="card">
+      <h2>Invitations</h2>
+      <div id="invList"><p class="small">Chargement...</p></div>
+    </section>
+
+    <section class="card">
+      <h2>Collaborateurs</h2>
+      <div id="staffList"><p class="small">Chargement...</p></div>
+    </section>
+
+    <button class="btn line" id="logoutBtn" type="button">Se déconnecter</button>
+  </div>
+</main>
+<div class="toast" id="toast" role="status"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://ojelswkxcgyyayonvdnk.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_ZNTeFqr0eG6344aaivSzLQ_iOnk8mPW";
+const SITE_URL = "https://kamagatesolo352-create.github.io/kbz-shop/";
+
+const ROLES = { order_manager: "Gestionnaire des commandes", product_manager: "Gestionnaire des produits", admin: "Administrateur" };
+const STATUS = {
+  created: ["Invitation créée", "wait"],
+  whatsapp_prepared: ["Message préparé", "wait"],
+  whatsapp_opened: ["WhatsApp ouvert", "wait"],
+  sent_confirmed: ["Envoi confirmé par l'administrateur", "wait"],
+  activating: ["Activation en cours", "wait"],
+  accepted: ["Acceptée", "ok"],
+  revoked: ["Révoquée", "bad"],
+  expired: ["Expirée", "bad"]
+};
+const ACTIVE = ["created", "whatsapp_prepared", "whatsapp_opened", "sent_confirmed", "activating"];
+
+const $ = id => document.getElementById(id);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[c]);
+
+let db = null;
+try { db = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY); } catch (e) { console.error(e); }
+
+let current = null;
+let invitations = [];
+let tt;
+function toast(m) {
+  const el = $("toast"); el.textContent = m; el.classList.add("show");
+  clearTimeout(tt); tt = setTimeout(() => el.classList.remove("show"), 2400);
+}
+
+function errMsg(error) {
+  const t = String((error && error.message) || "");
+  if (error && error.code === "P0001") return t;
+  if (/failed to fetch|network|load failed/i.test(t)) return "Problème de connexion internet. Réessaie.";
+  if (/jwt|expired/i.test(t)) return "Ta session a expiré. Reconnecte-toi.";
+  if (error && (error.code === "42501" || /permission denied|row-level/i.test(t))) return "Action refusée.";
+  if (error && (error.code === "PGRST202" || /could not find the function/i.test(t))) return "Le script SQL de l'étape 9 n'est pas installé.";
+  return "Erreur : " + (t || "inconnue");
+}
+
+function waDigits(p) {
+  const d = String(p || "").replace(/\D/g, "");
+  return d.length === 10 && d.startsWith("0") ? "225" + d : d;
+}
+
+/* ---------- Connexion ---------- */
+async function showApp(session) {
+  try {
+    const { data, error } = await db.from("staff").select("role, active").eq("user_id", session.user.id).maybeSingle();
+    if (error) throw error;
+    if (!data || !data.active || data.role !== "admin") {
+      await db.auth.signOut();
+      $("loginErr").textContent = "Cette page est réservée à l'administrateur.";
+      $("loginErr").classList.remove("hidden");
+      return false;
+    }
+  } catch (error) {
+    console.error(error);
+    $("loginErr").textContent = errMsg(error);
+    $("loginErr").classList.remove("hidden");
+    return false;
+  }
+  $("loginBox").classList.add("hidden");
+  $("app").classList.remove("hidden");
+  loadAll();
+  return true;
+}
+
+$("loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  $("loginErr").classList.add("hidden");
+  $("loginBtn").disabled = true;
+  try {
+    const { data, error } = await db.auth.signInWithPassword({ email: $("email").value.trim(), password: $("password").value });
+    if (error) throw error;
+    $("password").value = "";
+    await showApp(data.session);
+  } catch (error) {
+    $("loginErr").textContent = "Connexion impossible. Vérifie ton e-mail et ton mot de passe.";
+    $("loginErr").classList.remove("hidden");
+  }
+  $("loginBtn").disabled = false;
+});
+
+$("logoutBtn").onclick = async () => {
+  await db.auth.signOut();
+  current = null;
+  $("app").classList.add("hidden");
+  $("resultBox").classList.add("hidden");
+  $("loginBox").classList.remove("hidden");
+};
+
+/* ---------- Données ---------- */
+function loadAll() { loadInvitations(); loadStaff(); }
+
+async function loadInvitations() {
+  const { data, error } = await db.from("invitations")
+    .select("id, full_name, email, whatsapp, role, status, expires_at, created_at")
+    .order("created_at", { ascending: false }).limit(50);
+  if (error) { $("invList").innerHTML = `<div class="err">${esc(errMsg(error))}</div>`; return; }
+  invitations = data || [];
+  renderInvitations();
+  if (current) updateState();
+}
+
+function statusOf(inv) {
+  if (ACTIVE.includes(inv.status) && new Date(inv.expires_at) < new Date()) return "expired";
+  return inv.status;
+}
+
+function renderInvitations() {
+  if (!invitations.length) { $("invList").innerHTML = '<p class="small">Aucune invitation pour le moment.</p>'; return; }
+  $("invList").innerHTML = invitations.map(inv => {
+    const s = statusOf(inv);
+    const label = STATUS[s] || [s, "wait"];
+    const open = ACTIVE.includes(inv.status);
+    return `<div class="item">
+      <strong>${esc(inv.full_name)}</strong> <span class="stat ${label[1]}">${esc(label[0])}</span><br>
+      <span class="small">${esc(ROLES[inv.role] || inv.role)} · ${esc(inv.email)}<br>Valable jusqu'au ${new Date(inv.expires_at).toLocaleString("fr-FR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}</span><br>
+      ${open ? `<button class="btn line mini danger" onclick="revokeInv(${inv.id})">Révoquer</button>
+                <button class="btn line mini" onclick="renewInv(${inv.id})">Renouveler</button>` : ""}
+    </div>`;
+  }).join("");
+}
+
+async function loadStaff() {
+  const { data, error } = await db.from("staff").select("user_id, full_name, role, active, created_at").order("created_at", { ascending: true });
+  if (error) { $("staffList").innerHTML = `<div class="err">${esc(errMsg(error))}</div>`; return; }
+  $("staffList").innerHTML = (data || []).map(s => {
+    if (s.role === "admin") {
+      return `<div class="item"><strong>${esc(s.full_name)}</strong> <span class="stat ok">Administrateur</span></div>`;
+    }
+    return `<div class="item">
+      <strong>${esc(s.full_name)}</strong> <span class="stat ${s.active ? "ok" : "bad"}">${s.active ? "Actif" : "Désactivé"}</span>
+      <select id="role_${esc(s.user_id)}" style="margin-top:8px">
+        <option value="order_manager" ${s.role === "order_manager" ? "selected" : ""}>Gestionnaire des commandes</option>
+        <option value="product_manager" ${s.role === "product_manager" ? "selected" : ""}>Gestionnaire des produits</option>
+      </select>
+      <button class="btn line mini" onclick="saveRole('${esc(s.user_id)}')">Enregistrer le rôle</button>
+      <button class="btn line mini ${s.active ? "danger" : ""}" onclick="setActive('${esc(s.user_id)}', ${!s.active})">${s.active ? "Désactiver" : "Réactiver"}</button>
+    </div>`;
+  }).join("") || '<p class="small">Aucun collaborateur.</p>';
+}
+
+/* ---------- Invitation ---------- */
+function buildMessage(name, role, link) {
+  return "Bonjour " + name + ", tu es invité(e) à rejoindre l'équipe KBZ SHOP en tant que " + (ROLES[role] || role) + ".\n\n" +
+    "Pour activer ton compte, utilise le lien personnel ci-dessous :\n" + link + "\n\n" +
+    "Suis les instructions pour vérifier ton identité (un code à 6 chiffres te sera donné séparément) et créer ton mot de passe personnel.\n\n" +
+    "Ce lien est temporaire et ne peut être utilisé qu'une seule fois.\n\n" +
+    "Si tu n'es pas à l'origine de cette inscription ou si tu rencontres un problème, contacte l'administrateur de KBZ SHOP.";
+}
+
+function updateState() {
+  const inv = invitations.find(i => i.id === current.id);
+  const s = inv ? statusOf(inv) : "created";
+  $("r_state").textContent = "État : " + ((STATUS[s] || [s])[0]) + ". Rien n'est « envoyé » tant que vous ne l'avez pas confirmé.";
+}
+
+$("inviteForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  $("inviteErr").classList.add("hidden");
+  const wa = waDigits($("i_wa").value);
+  if (!/^[0-9]{8,15}$/.test(wa)) { showInviteError("Numéro WhatsApp invalide."); return; }
+  $("inviteBtn").disabled = true;
+  try {
+    const { data, error } = await db.rpc("create_invitation", {
+      p_name: $("i_name").value.trim(),
+      p_email: $("i_email").value.trim(),
+      p_whatsapp: wa,
+      p_role: $("i_role").value,
+      p_hours: Number($("i_hours").value)
+    });
+    if (error) throw error;
+
+    const link = SITE_URL + "activer.html#t=" + data.token;
+    current = { id: data.id, name: data.name, role: data.role, wa: data.whatsapp, code: data.code };
+    $("r_name").textContent = data.name;
+    $("r_code").textContent = data.code.slice(0, 3) + " " + data.code.slice(3);
+    $("r_text").value = buildMessage(data.name, data.role, link);
+    $("r_wa").href = "#";
+    $("resultBox").classList.remove("hidden");
+    $("resultBox").scrollIntoView({ behavior: "smooth" });
+    $("inviteForm").reset();
+
+    await db.rpc("mark_invitation", { p_id: data.id, p_step: "prepared" });
+    await loadInvitations();
+  } catch (error) {
+    console.error(error);
+    showInviteError(errMsg(error));
+  }
+  $("inviteBtn").disabled = false;
+});
+
+function showInviteError(m) { $("inviteErr").textContent = m; $("inviteErr").classList.remove("hidden"); }
+
+$("r_wa").addEventListener("click", async ev => {
+  if (!current) return;
+  ev.preventDefault();
+  const url = "https://wa.me/" + current.wa + "?text=" + encodeURIComponent($("r_text").value);
+  window.open(url, "_blank", "noopener");
+  try { await db.rpc("mark_invitation", { p_id: current.id, p_step: "opened" }); await loadInvitations(); } catch (e) { console.error(e); }
+});
+
+$("r_copy").onclick = async () => {
+  const text = $("r_text").value;
+  try {
+    await navigator.clipboard.writeText(text);
+    toast("Message copié");
+  } catch (e) {
+    $("r_text").select();
+    document.execCommand("copy");
+    toast("Message copié");
+  }
+};
+
+$("r_sent").onclick = async () => {
+  if (!current) return;
+  try {
+    const { error } = await db.rpc("mark_invitation", { p_id: current.id, p_step: "sent" });
+    if (error) throw error;
+    toast("Envoi confirmé");
+    await loadInvitations();
+  } catch (error) { alert(errMsg(error)); }
+};
+
+$("r_close").onclick = () => {
+  current = null;
+  $("r_code").textContent = "";
+  $("r_text").value = "";
+  $("resultBox").classList.add("hidden");
+};
+
+async function revokeInv(id) {
+  if (!confirm("Révoquer cette invitation ? Le lien ne fonctionnera plus.")) return;
+  try {
+    const { error } = await db.rpc("revoke_invitation", { p_id: id });
+    if (error) throw error;
+    if (current && current.id === id) $("r_close").click();
+    toast("Invitation révoquée");
+    await loadInvitations();
+  } catch (error) { alert(errMsg(error)); }
+}
+
+async function renewInv(id) {
+  const inv = invitations.find(i => i.id === id);
+  if (!inv) return;
+  if (!confirm("Révoquer l'ancienne invitation et en préparer une nouvelle ?")) return;
+  try {
+    const { error } = await db.rpc("revoke_invitation", { p_id: id });
+    if (error) throw error;
+    $("i_name").value = inv.full_name;
+    $("i_email").value = inv.email;
+    $("i_wa").value = inv.whatsapp;
+    $("i_role").value = inv.role;
+    $("inviteForm").scrollIntoView({ behavior: "smooth" });
+    toast("Ancienne invitation révoquée. Vérifie puis appuie sur « Préparer ».");
+    await loadInvitations();
+  } catch (error) { alert(errMsg(error)); }
+}
+
+async function saveRole(userId) {
+  try {
+    const { error } = await db.rpc("set_staff_role", { p_user_id: userId, p_role: $("role_" + userId).value });
+    if (error) throw error;
+    toast("Rôle enregistré");
+    loadStaff();
+  } catch (error) { alert(errMsg(error)); }
+}
+
+async function setActive(userId, active) {
+  if (!active && !confirm("Désactiver ce collaborateur ? Il perdra son accès, ses données et son historique restent.")) return;
+  try {
+    const { error } = await db.rpc("set_staff_active", { p_user_id: userId, p_active: active });
+    if (error) throw error;
+    toast(active ? "Collaborateur réactivé" : "Collaborateur désactivé");
+    loadStaff();
+  } catch (error) { alert(errMsg(error)); }
+}
+
+(async () => {
+  if (!db) { $("loginErr").textContent = "Service indisponible."; $("loginErr").classList.remove("hidden"); return; }
+  const { data } = await db.auth.getSession();
+  if (data.session) await showApp(data.session);
+})();
+</script>
+</body>
+  </html>
