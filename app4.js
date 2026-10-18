@@ -1,3 +1,92 @@
+/* ---------- Actions sur les commandes ---------- */
+async function toggleOrder(id) {
+  openOrderId = openOrderId === id ? null : id;
+  renderOrders();
+  if (openOrderId === id) loadHistory(id);
+}
+async function loadHistory(id) {
+  const o = orders.find(x => x.id === id);
+  if (!o || !(isAdminRole() || (o.assigned_to && o.assigned_to === userId))) return;
+  try {
+    const { data, error } = await supabaseClient.rpc("staff_order_history", { p_order_id: id });
+    if (error) throw error;
+    historyCache[id] = Array.isArray(data) ? data : [];
+  } catch (error) {
+    console.error("Erreur d'historique :", error);
+    historyCache[id] = [];
+  }
+  if (openOrderId === id) renderOrders();
+}
+async function refreshOrder(id) {
+  delete historyCache[id];
+  await loadOrders();
+  if (openOrderId === id) loadHistory(id);
+}
+async function claimOrder(id) {
+  if (!loggedIn || !supabaseClient || !canOrders()) return;
+  try {
+    const { error } = await supabaseClient.rpc("claim_order", { p_order_id: id });
+    if (error) throw error;
+    toast("Commande prise en charge");
+    await refreshOrder(id);
+  } catch (error) {
+    console.error("Erreur de prise en charge :", error);
+    alert("Impossible de prendre cette commande en charge.\n" + friendlyError(error));
+    await loadOrders();
+  }
+}
+async function releaseOrder(id) {
+  if (!loggedIn || !supabaseClient || !canOrders()) return;
+  if (!confirm("Libérer cette commande ? Un autre collaborateur pourra la prendre.")) return;
+  try {
+    const { error } = await supabaseClient.rpc("release_order", { p_order_id: id });
+    if (error) throw error;
+    toast("Commande libérée");
+    await refreshOrder(id);
+  } catch (error) {
+    console.error("Erreur de libération :", error);
+    alert("Impossible de libérer la commande.\n" + friendlyError(error));
+    await loadOrders();
+  }
+}
+async function changeStatus(id, expected, status) {
+  if (!loggedIn || !supabaseClient || !canOrders()) return;
+  let note = null;
+  if (status === "annulee") {
+    if (!confirm("Annuler cette commande ?")) return;
+    note = prompt("Motif d'annulation (facultatif) :") || null;
+  }
+  try {
+    const { error } = await supabaseClient.rpc("set_order_status", {
+      p_order_id: id, p_expected: expected, p_status: status, p_note: note
+    });
+    if (error) throw error;
+    toast("Statut mis à jour");
+    await refreshOrder(id);
+  } catch (error) {
+    console.error("Erreur de statut :", error);
+    alert("Impossible de modifier le statut.\n" + friendlyError(error));
+    await loadOrders();
+  }
+}
+async function saveDeliveryFee(id) {
+  if (!loggedIn || !supabaseClient || !canOrders()) return;
+  const raw = $("fee_" + id).value.trim();
+  let fee = null;
+  if (raw !== "") {
+    fee = Number(raw);
+    if (!Number.isInteger(fee) || fee < 0 || fee > 1000000) { alert("Entre un montant valide (nombre entier)."); return; }
+  }
+  try {
+    const { error } = await supabaseClient.rpc("set_delivery_fee", { p_order_id: id, p_fee: fee });
+    if (error) throw error;
+    toast("Frais de livraison enregistrés");
+    await refreshOrder(id);
+  } catch (error) {
+    console.error("Erreur de frais de livraison :", error);
+    alert("Impossible d'enregistrer les frais.\n" + friendlyError(error));
+  }
+}
 /* ---------- Liste des articles (vendeur) ---------- */
 function renderSellerProducts() {
   const container = $("sellerProducts");
@@ -14,7 +103,7 @@ function renderSellerProducts() {
       </div>
       <div class="item-actions">
         <button class="btn line" onclick="editProduct('${safeText(product.id)}')">Modifier</button>
-        <button class="btn line danger" onclick="deleteProduct('${safeText(product.id)}')">Supprimer</button>
+        ${isAdminRole() ? `<button class="btn line danger" onclick="deleteProduct('${safeText(product.id)}')">Supprimer</button>` : ""}
       </div>
     </div>
   `).join("");
@@ -142,7 +231,7 @@ function editProduct(id) {
   $("productForm").scrollIntoView({ behavior: "smooth" });
 }
 async function deleteProduct(id) {
-  if (!loggedIn || !supabaseClient) return;
+  if (!loggedIn || !supabaseClient || !isAdminRole()) return;
   if (!confirm("Veux-tu vraiment supprimer cet article ?")) return;
   const product = products.find(item => item.id === id);
   try {
@@ -161,7 +250,7 @@ async function deleteProduct(id) {
 }
 /* ---------- Réglages WhatsApp ---------- */
 async function saveSettings() {
-  if (!loggedIn || !supabaseClient) return;
+  if (!loggedIn || !supabaseClient || !isAdminRole()) return;
   let whatsapp = $("whatsappNumber").value.trim();
   whatsapp = whatsapp.replace(/[\s()+.-]/g, "");
   if (whatsapp && !/^\d{8,15}$/.test(whatsapp)) {
